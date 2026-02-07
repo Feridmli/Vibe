@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Tribes Club | Official Tribe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Syncopate:wght@400;700&display=swap');
+
+        :root {
+            --black: #050505;
+            --white: #ffffff;
+            --accent: #00f6ff; /* Neon Cyan */
+            --purple: #9d50bb;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* DYNAMIC GRADIENT BACKGROUND */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% -20%, #1a1a2e 0%, #050505 100%);
+        }
+
+        .glow-sphere {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0, 246, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(30%, 20%); }
+        }
+
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* HEADER */
+        header {
+            padding: 30px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav a {
+            margin-left: 35px;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.4s;
+            opacity: 0.6;
+        }
+
+        nav a:hover { opacity: 1; color: var(--accent); }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .hero-tag {
+            background: rgba(0, 246, 255, 0.1);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 246, 255, 0.2);
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 4px; /* Sharp modern look */
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--white);
+            color: var(--white);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--black);
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        }
+
+        /* INFINITE MINT TICKER */
+        .ticker {
+            background: var(--accent);
+            color: var(--black);
+            padding: 15px 0;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            animation: tickerScroll 20s linear infinite;
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* COLLECTION PREVIEW */
+        .preview {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .nft-card {
+            aspect-ratio: 1/1;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .nft-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .nft-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transition: 0.5s;
+        }
+
+        .nft-card:hover img { filter: grayscale(0%); }
+
+        /* MINT INFO SECTION */
+        .mint-info {
+            padding: 100px 10%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .mint-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 50px;
+            border: 1px solid var(--border);
+            background: var(--black);
+        }
+
+        .timer {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3rem;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+
+        .mint-details {
+            list-style: none;
+        }
+
+        .mint-details li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* ROADMAP */
+        .roadmap {
+            padding: 100px 10%;
+        }
+
+        .roadmap-item {
+            padding: 40px;
+            border-left: 1px solid var(--accent);
+            position: relative;
+            margin-bottom: 20px;
+            background: var(--glass);
+            transition: 0.4s;
+        }
+
+        .roadmap-item:hover { background: rgba(0, 246, 255, 0.05); }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -5px; top: 0;
+            width: 10px; height: 10px;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 50px 10%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            opacity: 0.5;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            h1 { font-size: 3rem; }
+            .mint-info { padding: 50px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow">
+    <div class="glow-sphere"></div>
+</div>
+
+<header>
+    <a href="#" class="logo">VTC<span>.</span></a>
+    <nav>
+        <a href="#collection">Collection</a>
+        <a href="#mint">Mint Schedule</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="https://x.com" target="_blank">Twitter</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-tag">Genesis Collection Launch</div>
+        <h1>SHARE THE VIBE,<br>JOIN THE TRIBE<span>.</span></h1>
+        <p>A digital identity for the dreamers, builders, and positive thinkers. 6,666 unique Vibes living on the Base blockchain.</p>
+        <a href="#mint" class="btn">View Mint Schedule</a>
+    </section>
+
+    <div class="ticker">
+        <div class="ticker-content">
+            VIBE TRIBES CLUB • BASE NETWORK • NO DRAMA JUST VIBES • 6,666 TOTAL SUPPLY • JOIN THE TRIBE • VIBE TRIBES CLUB • BASE NETWORK • NO DRAMA JUST VIBES • 6,666 TOTAL SUPPLY • JOIN THE TRIBE •
+        </div>
+    </div>
+
+    <section id="collection" class="preview">
+        <div class="nft-card"><img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=600" alt="Vibe 1"></div>
+        <div class="nft-card"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600" alt="Vibe 2"></div>
+        <div class="nft-card"><img src="https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?auto=format&fit=crop&q=80&w=600" alt="Vibe 3"></div>
+        <div class="nft-card"><img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=600" alt="Vibe 4"></div>
+    </section>
+
+    <section id="mint" class="mint-info">
+        <div style="flex: 1;">
+            <div class="hero-tag">Minting Status</div>
+            <h2 style="font-family: 'Syncopate'; font-size: 2.5rem; margin-top: 20px;">READY FOR<br>THE DROP?</h2>
+            <div class="timer" id="timer">00:00:00</div>
+            <p>Phase 01 begins shortly. Make sure you follow our social channels for official links.</p>
+        </div>
+        
+        <div class="mint-box">
+            <ul class="mint-details">
+                <li><span>PHASE 1: TEAM</span> <span>FREE • 15 MIN</span></li>
+                <li><span>PHASE 2: GTD WL</span> <span>0.00015 ETH • 1 HOUR</span></li>
+                <li><span>PHASE 3: PUBLIC</span> <span>0.0005 ETH • 3 DAYS</span></li>
+                <li style="border: none; margin-top: 20px;">
+                    <button class="btn" style="width: 100%; background: var(--accent); color: var(--black); border: none;">LIVE SOON</button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="roadmap" class="roadmap">
+        <h2 style="font-family: 'Syncopate'; text-align: center; margin-bottom: 60px;">THE ROADMAP</h2>
+        
+        <div class="roadmap-item">
+            <h3>PHASE 01: THE AWAKENING</h3>
+            <p>Launch of the 2,222 Genesis collection. Community building and establishing the core "Vibe Tribe".</p>
+        </div>
+        
+        <div class="roadmap-item">
+            <h3>PHASE 02: SYNERGY</h3>
+            <p>Exclusive holder-only benefits. Integration with Base ecosystem partners and surprise "Vibe Tribes" airdrops.</p>
+        </div>
+        
+        <div class="roadmap-item">
+            <h3>PHASE 03: REALITY</h3>
+            <p>IRL networking events, limited edition physical merch, and the expansion into the VTC lifestyle brand.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 VIBE TRIBES CLUB. DESIGNED FOR THE TRIBE.</p>
+</footer>
+
+<script>
+    // Simple Countdown
+    function updateCountdown() {
+        const target = new Date("Feb 28, 2026 20:00:00").getTime();
+        const now = new Date().getTime();
+        const gap = target - now;
+
+        const second = 1000;
+        const minute = second * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
+
+        const d = Math.floor(gap / day);
+        const h = Math.floor((gap % day) / hour);
+        const m = Math.floor((gap % hour) / minute);
+        const s = Math.floor((gap % minute) / second);
+
+        document.getElementById("timer").innerText = 
+            `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
