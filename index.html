@@ -103,20 +103,40 @@
             transition: 0.3s;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
 
-        .social-icons svg {
+        /* ALL ICONS UNIFIED */
+        .social-icons svg, 
+        .opensea-custom-icon {
             width: 20px;
             height: 20px;
-            fill: var(--white);
-            opacity: 0.6;
             transition: 0.3s;
         }
 
+        /* SVGs specific */
+        .social-icons svg {
+            fill: var(--white);
+            opacity: 0.6;
+        }
+
+        /* Image specific */
+        .opensea-custom-icon {
+            opacity: 0.6;
+            object-fit: contain;
+        }
+
+        /* Hover States */
         .social-icons a:hover svg {
             fill: var(--accent);
             opacity: 1;
             transform: translateY(-2px);
+        }
+
+        .social-icons a:hover .opensea-custom-icon {
+            opacity: 1;
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 5px var(--accent));
         }
 
         nav a {
@@ -421,7 +441,7 @@
         <a href="#" class="logo">VTC<span>.</span></a>
         <div class="social-icons">
             <a href="https://opensea.io/collection/vibetribesclub" target="_blank" title="OpenSea">
-                <svg viewBox="0 0 24 24"><path d="M2.322 13.52c0-3.328 2.304-7.68 11.264-7.68 1.28 0 2.304.256 3.072.512l-1.024 2.56c-.512-.256-1.024-.512-1.792-.512-4.096 0-7.424 2.56-8.192 5.12h11.264c.256 0 .256.256.256.256 0 1.28-1.024 5.376-7.68 5.376-7.68 0-7.168-5.632-7.168-5.632zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/></svg>
+                <img src="https://cdn.discordapp.com/attachments/1458768504390946928/1471603055349862612/IMG_6800.png?ex=698f88a5&is=698e3725&hm=d9d332b10fc2f4c49a31152d64152d7e20f7408c16d6a15f0e715694915d982e&" class="opensea-custom-icon" alt="OpenSea">
             </a>
             <a href="https://x.com/vibetribesclub?s=21" target="_blank" title="Twitter">
                 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg>
