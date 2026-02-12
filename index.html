@@ -141,7 +141,7 @@
 
         .btn {
             padding: 18px 45px;
-            border-radius: 4px; /* Sharp modern look */
+            border-radius: 4px; 
             text-decoration: none;
             font-weight: 700;
             letter-spacing: 2px;
@@ -219,42 +219,123 @@
 
         .nft-card:hover img { filter: grayscale(0%); }
 
-        /* MINT INFO SECTION */
+        /* MINT SECTION - REIMAGINED */
         .mint-info {
             padding: 100px 10%;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 246, 255, 0.02), transparent);
+        }
+
+        .mint-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
             align-items: center;
-            background: rgba(255,255,255,0.02);
         }
 
-        .mint-box {
-            flex: 1;
-            min-width: 300px;
-            padding: 50px;
+        .timer-display {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .timer-block {
+            background: var(--glass);
             border: 1px solid var(--border);
-            background: var(--black);
+            padding: 15px;
+            min-width: 80px;
+            text-align: center;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
         }
 
-        .timer {
+        .timer-num {
+            display: block;
             font-family: 'Syncopate', sans-serif;
-            font-size: 3rem;
+            font-size: 2rem;
             color: var(--accent);
-            margin: 20px 0;
+            font-weight: 700;
         }
 
-        .mint-details {
-            list-style: none;
+        .timer-label {
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            text-transform: uppercase;
         }
 
-        .mint-details li {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
+        .phase-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .phase-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            align-items: center;
+            border-radius: 12px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-card:hover {
+            border-color: rgba(0, 246, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            transform: scale(1.02);
+        }
+
+        .phase-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.1);
+        }
+
+        .phase-info h4 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .phase-info p {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .phase-price {
+            text-align: right;
+        }
+
+        .price-val {
+            display: block;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .price-time {
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        @keyframes neon-pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            box-shadow: 0 0 10px var(--accent);
+            animation: neon-pulse 1.5s infinite;
         }
 
         /* ROADMAP */
@@ -293,10 +374,10 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            .mint-grid { grid-template-columns: 1fr; }
             nav { display: none; }
             h1 { font-size: 3rem; }
-            .mint-info { padding: 50px 5%; }
         }
     </style>
 </head>
@@ -338,22 +419,56 @@
     </section>
 
     <section id="mint" class="mint-info">
-        <div style="flex: 1;">
-            <div class="hero-tag">Minting Status</div>
-            <h2 style="font-family: 'Syncopate'; font-size: 2.5rem; margin-top: 20px;">READY FOR<br>THE DROP?</h2>
-            <div class="timer" id="timer">00:00:00</div>
-            <p>Phase 01 begins shortly. Make sure you follow our social channels for official links.</p>
-        </div>
-        
-        <div class="mint-box">
-            <ul class="mint-details">
-                <li><span>PHASE 1: TEAM</span> <span>FREE • 15 MIN</span></li>
-                <li><span>PHASE 2: OG</span> <span>0.0003 ETH • 1 HOUR</span></li>
-                <li><span>PHASE 3: PUBLIC</span> <span>0.0005 ETH • 3 DAYS</span></li>
-                <li style="border: none; margin-top: 20px;">
-                    <button class="btn" style="width: 100%; background: var(--accent); color: var(--black); border: none;">LIVE SOON</button>
-                </li>
-            </ul>
+        <div class="mint-grid">
+            <div class="mint-text">
+                <div class="hero-tag">Minting Status</div>
+                <h2 style="font-family: 'Syncopate'; font-size: 2.5rem; margin: 20px 0;">GET ON THE<br><span style="color: var(--accent);">ALLOWLIST</span></h2>
+                <p style="opacity: 0.7; margin-bottom: 30px;">The countdown to the next evolution has begun. Prepare your wallet for the official Base drop.</p>
+                
+                <div class="timer-display">
+                    <div class="timer-block"><span class="timer-num" id="d">00</span><span class="timer-label">Days</span></div>
+                    <div class="timer-block"><span class="timer-num" id="h">00</span><span class="timer-label">Hrs</span></div>
+                    <div class="timer-block"><span class="timer-num" id="m">00</span><span class="timer-label">Min</span></div>
+                    <div class="timer-block" style="border-color: var(--accent);"><span class="timer-num" id="s">00</span><span class="timer-label">Sec</span></div>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-card">
+                    <div class="phase-info">
+                        <h4>PHASE 01: TEAM</h4>
+                        <p>Internal allocation</p>
+                    </div>
+                    <div class="phase-price">
+                        <span class="price-val">FREE</span>
+                        <span class="price-time">15 MINS</span>
+                    </div>
+                </div>
+
+                <div class="phase-card active">
+                    <div class="phase-info">
+                        <h4><span class="live-dot"></span>PHASE 02: OG</h4>
+                        <p>Whitelist only</p>
+                    </div>
+                    <div class="phase-price">
+                        <span class="price-val">0.0003 ETH</span>
+                        <span class="price-time">1 HOUR</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-info">
+                        <h4>PHASE 03: PUBLIC</h4>
+                        <p>Open for everyone</p>
+                    </div>
+                    <div class="phase-price">
+                        <span class="price-val">0.0005 ETH</span>
+                        <span class="price-time">3 DAYS</span>
+                    </div>
+                </div>
+
+                <button class="btn" style="width: 100%; background: var(--accent); color: var(--black); border: none; margin-top: 10px;">CONNECT WALLET</button>
+            </div>
         </div>
     </section>
 
@@ -382,7 +497,6 @@
 </footer>
 
 <script>
-    // Simple Countdown
     function updateCountdown() {
         const target = new Date("Feb 18, 2026 20:00:00").getTime();
         const now = new Date().getTime();
@@ -393,16 +507,23 @@
         const hour = minute * 60;
         const day = hour * 24;
 
-        const d = Math.floor(gap / day);
-        const h = Math.floor((gap % day) / hour);
-        const m = Math.floor((gap % hour) / minute);
-        const s = Math.floor((gap % minute) / second);
+        if (gap > 0) {
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
 
-        document.getElementById("timer").innerText = 
-            `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            document.getElementById("d").innerText = d.toString().padStart(2, '0');
+            document.getElementById("h").innerText = h.toString().padStart(2, '0');
+            document.getElementById("m").innerText = m.toString().padStart(2, '0');
+            document.getElementById("s").innerText = s.toString().padStart(2, '0');
+        } else {
+            document.getElementById("timer").innerHTML = "<h2 style='color:var(--accent); font-family:Syncopate;'>MINT IS LIVE</h2>";
+        }
     }
 
     setInterval(updateCountdown, 1000);
+    updateCountdown();
 </script>
 
 </body>
